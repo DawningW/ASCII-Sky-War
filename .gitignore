@@ -17,8 +17,8 @@
 *.pch
 
 # Libraries
-*.lib
-*.a
+# *.lib
+# *.a
 *.la
 *.lo
 
@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Visual Studio
+.vs
+Debug
+Release
+*.vcxproj.filters
+*.vcxproj.user

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh">
+    <head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+		
+		<title>飞机大战排行榜</title>
+	</head>
+	
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">DUT-Software2016-612</a>
+		</nav>
+		
+		<div class="container border bg-light">
+			<div class="my-4">
+				<h1 class="col text-center text-nowrap">飞机大战排行榜</h1>
+		    </div>
+			
+		    <div class="m-2">
+				<div class="col input-group form-inline">
+					<p class="my-auto">筛选器:</p>
+				    <input class="form-control mx-3" placeholder="玩家名字" aria-label="Search">
+				    <button class="btn btn-outline-primary" type="submit">查找</button>  
+				</div>
+		    </div>
+
+			<div class="mx-2">
+				<table class="table">
+				  <thead>
+					<tr>
+					  <th scope="col">#</th>
+					  <th scope="col">Time</th>
+					  <th scope="col">Name</th>
+					  <th scope="col">Score</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr>
+					  <th scope="row">1</th>
+					  <td>2020</td>
+					  <td>AZhen</td>
+					  <td>10000</td>
+					</tr>
+					<tr>
+					  <th scope="row">2</th>
+					  <td>2020</td>
+					  <td>WC</td>
+					  <td>1000</td>
+					</tr>
+					<tr>
+					  <th scope="row">3</th>
+					  <td>2020</td>
+					  <td>Backendman</td>
+					  <td>666</td>
+					</tr>
+				  </tbody>
+				</table>
+		    </div>
+		
+			<nav class="mx-2" aria-label="Page navigation">
+				<ul class="pagination">
+					<li class="page-item">
+						<a class="page-link" href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<li class="page-item"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item"><a class="page-link" href="#">4</a></li>
+					<li class="page-item"><a class="page-link" href="#">5</a></li>
+					<li class="page-item">
+						<a class="page-link" href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+					<li class="input-group form-inline">
+						<input type="number" class="form-control" placeholder="页码">
+						<button class="btn btn-primary" type="submit">Go</button>
+					</li>
+				</ul>
+			</nav>
+
+		</div>
+	</body>
+</html>
