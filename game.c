@@ -46,7 +46,7 @@ int fps;
 // 当前帧
 long frame;
 // 选中的按钮
-char button;
+int button;
 // 游戏的难度
 char difficulty;
 // 游戏的得分
