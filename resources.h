@@ -11,6 +11,7 @@ struct StrObject
     int width;
     int height;
 };
+// TODO 透明遮罩
 
 // 资源枚举
 enum Resources

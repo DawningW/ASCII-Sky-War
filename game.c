@@ -270,18 +270,6 @@ static void updateGuiGame()
     // 每两帧(0.1秒)执行一次逻辑
     if (frame % (fps / 10) == 0)
     {
-        // 随机生成道具
-        if (frame % (fps * 3) == 0) // 每三秒生成一个道具
-        {
-            int x = randInt(6, GAME_WIDTH - 6);
-            int y = randInt(8, GAME_HEIGHT - 8);
-            int chance = randInt(0, 20);
-            char item = ' ';
-            if (chance < 16) item = '$';
-            else if (chance < 19) item = 'X';
-            else if (chance < 20) item = 'L';
-            items[y][x] = item;
-        }
         // 让飞机的子弹飞
         for (int y = 0; y < GAME_HEIGHT; ++y)
         {
@@ -318,6 +306,18 @@ static void updateGuiGame()
                 }
             }
         }
+        // 随机生成道具
+        if (frame % (fps * 3) == 0) // 每三秒生成一个道具
+        {
+            int x = randInt(6, GAME_WIDTH - 6);
+            int y = randInt(8, GAME_HEIGHT - 8);
+            int chance = randInt(0, 20);
+            char item = ' ';
+            if (chance < 16) item = '$';
+            else if (chance < 19) item = 'X';
+            else if (chance < 20) item = 'L';
+            items[y][x] = item;
+        }
         // 飞机大招
         if (player.animation)
         {
@@ -340,7 +340,8 @@ static void updateGuiGame()
             // TODO BOSS 算了, 不写了
         }
         // 获取一下飞机的碰撞箱
-        struct AABB box = getAABB(player.x, player.y, player.obj);
+        struct AABB box;
+        getAABB(&box, player.x, player.y, player.obj);
         // 让敌机飞
         for (int i = 0; i < length(planes); ++i)
         {
@@ -358,7 +359,8 @@ static void updateGuiGame()
             else
             {
                 // 敌机还在场上
-                struct AABB box2 = getAABB(planes[i].x, planes[i].y, planes[i].obj);
+                struct AABB box2;
+                getAABB(&box2, planes[i].x, planes[i].y, planes[i].obj);
                 char flag = 0; // 敌机是否死亡
                 if (checkBullet(bullets, &box2, '|'))
                 {
@@ -377,13 +379,13 @@ static void updateGuiGame()
                     if (frame % (fps * 2) == 0) // 两秒一次
                     {
                         // 敌机发射子弹
-                        bullets[planes[i].y + planes[i].obj->height / 2][planes[i].x] = 'o';
+                        bullets[planes[i].y + planes[i].obj->height / 2 - 1][planes[i].x] = 'o';
                     }
                     if (frame % (fps / 2) == 0) // 半秒一次
                     {
                         // 敌机飞出屏幕
                         ++planes[i].y;
-                        if (planes[i].y >= GAME_HEIGHT) flag = 1;
+                        if (planes[i].y > GAME_HEIGHT - planes[i].obj->height / 2) flag = 1;
                     }
                 }
                 if (flag)
@@ -396,15 +398,12 @@ static void updateGuiGame()
             }
         }
         // 飞机碰道具
-        int count = checkBullet(items, &box, '$');
-        score += count * 1000;
-        count = checkBullet(items, &box, 'L');
-        player.level += count;
-        count = checkBullet(items, &box, 'X');
-        player.skill = min(player.skill + count, 3);
+        score += checkBullet(items, &box, '$') * 1000;
+        player.level += checkBullet(items, &box, 'L');
+        player.skill += checkBullet(items, &box, 'X');
+        if (player.skill > 3) player.skill = 3;
         // 飞机碰子弹
-        count = checkBullet(bullets, &box, 'o');
-        player.health -= 5 * count;
+        player.health -= checkBullet(bullets, &box, 'o') * 5;
         // 更新飞机数据
         if (player.health <= 0)
         {

@@ -1,11 +1,11 @@
 #include "physics.h"
 
-struct AABB getAABB(int x, int y, struct StrObject* obj)
+void getAABB(struct AABB* box, int x, int y, struct StrObject* obj)
 {
-    int x0 = x - obj->width / 2;
-    int y0 = y - obj->height / 2;
-    struct AABB box = { x0, y0, x0 + obj->width - 1, y0 + obj->height - 1 };
-    return box;
+    box->x1 = x - obj->width / 2;
+    box->y1 = y - obj->height / 2;
+    box->x2 = box->x1 + obj->width - 1;
+    box->y2 = box->y1 + obj->height - 1;
 }
 
 int checkBullet(char bullets[][WIDTH], struct AABB* box, char bullet)

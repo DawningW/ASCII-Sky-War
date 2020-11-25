@@ -16,7 +16,7 @@ struct AABB
 };
 
 // 通过坐标获得该对象的碰撞箱
-struct AABB getAABB(int x, int y, struct StrObject* obj);
+void getAABB(struct AABB* box, int x, int y, struct StrObject* obj);
 // 检测给定的两端点之间(闭区间)所有的子弹并清除
 int checkBullet(char bullets[][WIDTH], struct AABB* box, char bullet);
 // 检测给定的两碰撞箱之间(闭区间)是否重叠
