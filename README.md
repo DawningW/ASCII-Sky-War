@@ -12,16 +12,26 @@ lib目录下附带32位版本的静态库, 如需64位库请自行编译
 
 注: 用nmake编译PDCurses时需在Makefile.vc的开头加入变量PLATFORM = X86
 
-需要用Visual Studio 2019或以上版本构建项目
+**需要用Visual Studio 2019或以上版本构建项目**
 
 ### Linux
 请自行下载/编译所需的库
 
-本项目提供了一个简易的make脚本(Makefile)用于构建项目
+```bash
+在Ubuntu下可运行以下命令安装所需依赖库
+sudo apt install libncurses5-dev
+sudo apt install libcurl4-openssl-dev
+git clone https://github.com/DaveGamble/cJSON.git
+cd cJSON
+make
+make install
+```
 
-在项目根目录下运行make会生成名为build的可执行文件
+本项目提供了一个简易的make脚本([Makefile](https://github.com/DawningW/ASCII-Sky-War/blob/main/Makefile))用于构建项目
 
-运行make clean可清理*.o目标文件
+在项目根目录下运行`make`会生成名为build的可执行文件
+
+运行`make clean`可清理*.o目标文件
 
 ## 第三方库
 - PDCurses-3.9
@@ -37,6 +47,6 @@ lib目录下附带32位版本的静态库, 如需64位库请自行编译
 
 对该仓库许可协议的最终解释权归作者所有
 
-引用的第三方库仍然遵守原开源协议
+引用的第三方库仍然遵守原协议
 
 ### 大连理工大学软件学院2016班612寝室作品
