@@ -60,7 +60,7 @@ static const char* _ABOUT[] = {
 };
 
 static const char* _STRINGS[] = {
-    "ASCII Sky War V1.2",
+    "ASCII Sky War V1.3",
     "Copyright 2020 DUT Software2016-612. Only for assignment use.",
     "Tip: Use UP or DOWN arrows to select, ENTER to confirm.",
     

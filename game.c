@@ -618,7 +618,7 @@ static void updateGuiSubmit()
         }
     }
     int lastkey = input_getch();
-    if ((lastkey >= 'a' && lastkey <= 'z') || (lastkey >= '0' && lastkey <= '9'))
+    if (isalpha(lastkey) || isdigit(lastkey))
     {
         for (int i = 0; i < MAX_NAME_LENGTH; ++i)
         {
