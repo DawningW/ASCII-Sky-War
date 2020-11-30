@@ -18,6 +18,13 @@ struct Key key;
 
 void input_init()
 {
+    intrflush(stdscr, FALSE);
+    curs_set(0);
+    noecho();
+    nonl();
+    raw();
+    keypad(stdscr, TRUE);
+    nodelay(stdscr, TRUE);
 #if defined(_WIN32) || defined(_WIN64)
     hWnd = GetConsoleWindow();
 #endif

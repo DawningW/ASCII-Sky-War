@@ -28,4 +28,7 @@ void renderer_drawProgress(int x, int y, int n, double progress);
 #define renderer_printStr(x, y, str, ...) mvwprintw(stdscr, y, x, str, ##__VA_ARGS__)
 void renderer_refresh();
 
+void renderer_setWindowTitle(const char* title);
+void renderer_setWindowSize(int lines, int cols);
+
 #endif // !__RENDERER_H__

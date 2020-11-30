@@ -19,7 +19,6 @@
 #define randInt(a, b) a + rand() % (b - a)
 static clock_t getCurrentTime();
 static void mysleep(clock_t);
-static void setWindowTitle(const char*);
 static void openBrowser(const char*);
 
 // 是否在运行
@@ -680,9 +679,10 @@ void game_init()
     guiupdaters[GUI_PAUSE] = updateGuiPause;
     guiupdaters[GUI_SUBMIT] = updateGuiSubmit;
     guiupdaters[GUI_RESULT] = updateGuiResult;
-    setWindowTitle(res_get(STRINGS)->str[0]);
-    input_init();
+    renderer_setWindowTitle(res_get(STRINGS)->str[0]);
+    renderer_setWindowSize(40, 80);
     renderer_init();
+    input_init();
 }
 
 void game_loop()
@@ -732,14 +732,6 @@ static void mysleep(clock_t time)
     Sleep(time);
 #else
     usleep(time * 1000);
-#endif
-}
-
-// 目前仅在Windows平台起作用
-static void setWindowTitle(const char *title)
-{
-#if defined(_WIN32) || defined(_WIN64)
-    PDC_set_title(title);
 #endif
 }
 

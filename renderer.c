@@ -6,18 +6,8 @@
 // TODO 游戏中使用子窗口
 void renderer_init()
 {
-#if defined(_WIN32) || defined(_WIN64)
-    system("mode con cols=80 lines=40");
-#endif
     initscr();
     start_color();
-    intrflush(stdscr, FALSE);
-    curs_set(0);
-    noecho();
-    nonl();
-    raw();
-    keypad(stdscr, TRUE);
-    nodelay(stdscr, TRUE);
     // Colors
     init_pair(1, COLOR_GREEN, COLOR_BLACK);
     init_pair(2, COLOR_YELLOW, COLOR_BLACK);
@@ -33,6 +23,13 @@ void renderer_end()
 void renderer_clear()
 {
     clear();
+#if defined(_WIN32) || defined(_WIN64)
+    if (is_termresized())
+    {
+        resize_term(0, 0);
+        curs_set(0);
+    }
+#endif
 }
 
 void renderer_drawBox()
@@ -87,4 +84,22 @@ void renderer_drawProgress(int x, int y, int n, double progress)
 void renderer_refresh()
 {
     refresh();
+}
+
+void renderer_setWindowTitle(const char* title)
+{
+#if defined(_WIN32) || defined(_WIN64)
+    PDC_set_title(title);
+#endif
+}
+
+void renderer_setWindowSize(int lines, int cols)
+{
+#if defined(_WIN32) || defined(_WIN64)
+    char command[30];
+    sprintf(command, "mode con cols=%d lines=%d", cols, lines);
+    system(command);
+#else
+    resize_term(lines, cols);
+#endif
 }
