@@ -19,17 +19,31 @@ struct Key key;
 void input_init()
 {
     intrflush(stdscr, FALSE);
-    curs_set(0);
-    noecho();
-    nonl();
-    raw();
-    keypad(stdscr, TRUE);
-    nodelay(stdscr, TRUE);
+    input_mode(1);
 #if defined(_WIN32) || defined(_WIN64)
     hWnd = GetConsoleWindow();
 #endif
     lastkey = -1;
     memset(&key, 0, sizeof(key));
+}
+
+void input_mode(char mode)
+{
+    curs_set(!mode);
+    if (mode)
+    {
+        noecho();
+        nonl();
+        raw();
+    }
+    else
+    {
+        echo();
+        nl();
+        noraw();
+    }
+    keypad(stdscr, mode);
+    nodelay(stdscr, mode);
 }
 
 void input_handle()

@@ -24,7 +24,9 @@ struct Key
 extern struct Key key;
 
 void input_init();
+void input_mode(char mode);
 void input_handle();
 int input_getch();
+#define input_scan(x, y, fmt, ...) mvwscanw(stdscr, y, x, fmt, ##__VA_ARGS__)
 
 #endif // __INPUT_H__

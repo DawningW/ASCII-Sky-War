@@ -52,6 +52,12 @@ void renderer_drawChar(int x, int y, char c)
     mvwaddch(stdscr, y, x, c);
 }
 
+void renderer_drawWideChar(int x, int y, wchar_t wc)
+{
+    mvwaddch(stdscr, y, x, wc);
+    mvwaddch(stdscr, y, x + 1, L' ');
+}
+
 void renderer_drawStr(int x, int y, const char* str)
 {
     mvwaddstr(stdscr, y, x, str);

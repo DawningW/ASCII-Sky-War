@@ -2,7 +2,6 @@
 #include "lang_common.h"
 #include "lang_en.h"
 
-#include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 

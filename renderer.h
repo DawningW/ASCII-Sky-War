@@ -2,7 +2,7 @@
 #define __RENDERER_H__
 
 #if defined(_WIN32) || defined(_WIN64)
-// #define PDC_WIDE // TODO Ö§³Ö¿í×Ö·û
+#define PDC_WIDE
 #include <PDCurses/curses.h>
 #include <PDCurses/curspriv.h>
 #else
@@ -18,6 +18,7 @@ void renderer_drawBox();
 void renderer_drawHorizontalLine(int x, int y, int n);
 void renderer_drawVerticalLine(int x, int y, int n);
 void renderer_drawChar(int x, int y, char c);
+void renderer_drawWideChar(int x, int y, wchar_t wc);
 void renderer_drawStr(int x, int y, const char* str);
 #define renderer_drawStrCenter(x, y, str) renderer_drawStr(x - strlen(str) / 2, y, str)
 void renderer_drawStrObj(int x, int y, struct StrObject* obj);

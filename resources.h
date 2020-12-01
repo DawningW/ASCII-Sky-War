@@ -1,6 +1,8 @@
 #ifndef __RESOURCES_H__
 #define __RESOURCES_H__
 
+#include <stddef.h>
+
 // 计算数组长度
 #define length(arr) sizeof(arr) / sizeof(arr[0])
 
