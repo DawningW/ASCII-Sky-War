@@ -45,6 +45,7 @@ char* util_httppost(const char* url, const char* fields)
         }
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*) &chunk);
+	curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, 3000);
         code = curl_easy_perform(curl);
         if (code != CURLE_OK)
         {
