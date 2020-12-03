@@ -74,9 +74,11 @@
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>$(LibraryPath)</LibraryPath>
     <ReferencePath>$(ReferencePath)</ReferencePath>
+    <CopyCppRuntimeToOutputDir>false</CopyCppRuntimeToOutputDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <CopyCppRuntimeToOutputDir>true</CopyCppRuntimeToOutputDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -155,6 +157,7 @@
     <ClCompile Include="input.c" />
     <ClCompile Include="lang_common.h" />
     <ClCompile Include="lang_zh.h" />
+    <ClCompile Include="logger.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="physics.c" />
     <ClCompile Include="renderer.c" />
@@ -165,6 +168,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="lang_en.h" />
+    <ClInclude Include="logger.h" />
     <ClInclude Include="physics.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="resources.h" />

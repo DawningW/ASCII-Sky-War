@@ -6,9 +6,14 @@
  */
 int main(int argc, char* argv[])
 {
-    // 初始化日志
     printf("Loading game, please wait...\n");
+    // 初始化日志
+    log_init();
     // 处理命令行参数
+    for (int i = 0; i < argc; ++i)
+    {
+        // TODO 把参数读取到命令行参数结构体中
+    }
     // 读取配置文件
     // 加载资源
     res_load();

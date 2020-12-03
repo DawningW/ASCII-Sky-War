@@ -7,6 +7,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <math.h>
+#include "logger.h"
 #include "resources.h"
 #include "physics.h"
 #include "input.h"

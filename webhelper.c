@@ -2,6 +2,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include "logger.h"
 
 struct StringMemory
 {
@@ -14,9 +15,9 @@ static size_t WriteMemoryCallback(void* contents, size_t size, size_t nmemb, voi
     size_t realsize = size * nmemb;
     struct StringMemory* mem = (struct StringMemory*) userp;
     char* ptr = realloc(mem->string, mem->size + realsize + 1);
-    if (!ptr) {
-        // ÄÚ´æ²»×ã
-        fprintf(stderr, "Error: no enough memory.\n");
+    if (!ptr)
+    {
+        log_error("no enough memory.");
         return 0;
     }
     mem->string = ptr;
@@ -35,7 +36,8 @@ char* util_httppost(const char* url, const char* fields)
 {
     struct StringMemory chunk = { 0, malloc(1) };
     CURL* curl = curl_easy_init();
-    if (curl) {
+    if (curl)
+    {
         CURLcode code;
         curl_easy_setopt(curl, CURLOPT_URL, url);
         if (fields != NULL)
@@ -45,11 +47,11 @@ char* util_httppost(const char* url, const char* fields)
         }
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*) &chunk);
-	curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, 3000);
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT_MS, 3000);
         code = curl_easy_perform(curl);
         if (code != CURLE_OK)
         {
-            fprintf(stderr, "Error: http failed: %s.\n", curl_easy_strerror(code));
+            log_error("http failed: %s.", curl_easy_strerror(code));
             free(chunk.string);
             return NULL;
         }

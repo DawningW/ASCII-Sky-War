@@ -617,7 +617,7 @@ static void updateGuiSubmit()
         }
     }
     int lastkey = input_getch();
-    if (isalpha(lastkey) || isdigit(lastkey))
+    if (lastkey >= 0 && lastkey <= 127 && (isalpha(lastkey) || isdigit(lastkey)))
     {
         for (int i = 0; i < MAX_NAME_LENGTH; ++i)
         {
@@ -707,7 +707,7 @@ void game_loop()
         clock_t wait = 1000 / fps - (getCurrentTime() - t);
         if (wait < 0)
         {
-            fprintf(stderr, "Warning: slow renderer: %ld ms.\n", -wait);
+            log_warn("slow renderer: %ld ms.", -wait);
             wait = 0;
         }
         mysleep(wait);
