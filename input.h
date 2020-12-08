@@ -1,6 +1,13 @@
 #ifndef __INPUT_H__
 #define __INPUT_H__
 
+#if defined(_WIN32) || defined(_WIN64)
+#define PDC_NCMOUSE
+#include <PDCurses/curses.h>
+#else
+#include <ncurses.h>
+#endif
+
 // 按键状态结构体
 struct Key
 {
@@ -22,6 +29,8 @@ struct Key
 
 // 当前按键状态
 extern struct Key key;
+extern MEVENT mevent;
+// TODO 鼠标按键示例 mevent.bstate & BUTTON1_CLICKED
 
 void input_init();
 void input_mode(char mode);

@@ -3,23 +3,24 @@
 #include <stdio.h>
 #include <string.h>
 #if defined(_WIN32) || defined(_WIN64)
-#include <PDCurses/curses.h>
 #include <Windows.h>
 #include <WinUser.h>
 #define ISKEYDOWN(key) ((GetKeyState(key) & 0x8000) ? 1 : 0)
 HWND hWnd;
 #else
-#include <ncurses.h>
 #define PADENTER 13
 #endif
 
 int lastkey;
 struct Key key;
+MEVENT mevent;
 
 void input_init()
 {
     intrflush(stdscr, FALSE);
     input_mode(1);
+    if (has_mouse())
+        mousemask(ALL_MOUSE_EVENTS, NULL);
 #if defined(_WIN32) || defined(_WIN64)
     hWnd = GetConsoleWindow();
 #endif
@@ -98,6 +99,10 @@ void input_handle()
     else if (currentkey == 'k') ++key.k;
     lastkey = currentkey;
 #endif
+    if (lastkey == KEY_MOUSE)
+    {
+        getmouse(&mevent);
+    }
     // «Âø’ ‰»Îª∫≥Â«¯
     fflush(stdin);
 }
