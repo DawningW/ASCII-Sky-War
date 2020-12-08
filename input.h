@@ -33,7 +33,7 @@ extern MEVENT mevent;
 // TODO Êó±ê°´¼üÊ¾Àý mevent.bstate & BUTTON1_CLICKED
 
 void input_init();
-void input_mode(char mode);
+void input_mode(bool mode);
 void input_handle();
 int input_getch();
 #define input_scan(x, y, fmt, ...) mvwscanw(stdscr, y, x, fmt, ##__VA_ARGS__)

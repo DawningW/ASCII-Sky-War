@@ -1,6 +1,8 @@
 #include "util.h"
 
+#include <stdlib.h>
 #include <time.h>
+#include <string.h>
 #if defined(_WIN32) || defined(_WIN64)
 #include <Windows.h>
 #else
