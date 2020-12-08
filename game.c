@@ -1,11 +1,5 @@
 #include "game.h"
 
-#if defined(_WIN32) || defined(_WIN64)
-#include <Windows.h>
-#else
-#include <unistd.h>
-#endif
-
 #define DEFAULT_FPS 20
 #define GAME_WIDTH 60
 #define GAME_HEIGHT 40
@@ -14,15 +8,8 @@
 #define MAX_ENERGY 100
 #define MAX_NAME_LENGTH 16
 
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#define min(a,b) (((a) < (b)) ? (a) : (b))
-#define randInt(a, b) a + rand() % (b - a)
-static clock_t getCurrentTime();
-static void mysleep(clock_t);
-static void openBrowser(const char*);
-
 // 是否在运行
-char running;
+bool running;
 // 当前界面
 enum Gui
 {
@@ -54,7 +41,7 @@ int score;
 struct
 {
     // 飞机的字符画
-    struct StrObject* obj;
+    StrObject* obj;
     // 飞机的坐标
     int x;
     int y;
@@ -67,14 +54,14 @@ struct
     // 飞机的必杀
     char skill;
     // 飞机必杀技动画
-    struct StrObject* animation;
+    StrObject* animation;
     // 飞机必杀技的帧计时器
     long timer;
 } player;
 // 敌机
 struct
 {
-    struct StrObject* obj;
+    StrObject* obj;
     int x;
     int y;
     int countdown;
@@ -82,10 +69,10 @@ struct
 // BOSS
 struct
 {
-    struct StrObject* obj;
+    StrObject* obj;
     int x;
     int y;
-    struct StrObject* animation;
+    StrObject* animation;
     long timer;
 } boss;
 // 子弹 (0空, |玩家的子弹(只会向上), o敌机的子弹(只会向下))
@@ -124,7 +111,7 @@ static void openGui(enum Gui id)
         player.skill = 0;
         player.animation = NULL;
         player.timer = frame;
-        struct StrObject* obj = res_get(PLANE2);
+        StrObject* obj = res_get(PLANE2);
         for (int i = 0; i < length(planes); ++i)
         {
             planes[i].obj = obj;
@@ -181,13 +168,13 @@ static void updateMenu(char size)
 
 static void updateGuiMenu()
 {
-    struct StrObject* obj = res_get(TITLE);
-    struct StrObject* obj2 = res_get(MENU);
-    struct StrObject* obj3 = res_get(STRINGS);
+    StrObject* obj = res_get(TITLE);
+    StrObject* obj2 = res_get(MENU);
+    StrObject* obj3 = res_get(STRINGS);
     updateMenu((char) obj2->height);
     if (key.enter == 1)
     {
-        if (button == obj2->height - 1) running = 0;
+        if (button == obj2->height - 1) running = false;
         openGui(button + 1);
         return;
     }
@@ -203,7 +190,7 @@ static void updateGuiMenu()
 
 static void updateGuiGame()
 {
-    struct StrObject* obj = res_get(STRINGS);
+    StrObject* obj = res_get(STRINGS);
     if (key.esc == 1)
     {
         gui = GUI_PAUSE;
@@ -339,7 +326,7 @@ static void updateGuiGame()
             // TODO BOSS 算了, 不写了
         }
         // 获取一下飞机的碰撞箱
-        struct AABB box;
+        AABB box;
         getAABB(&box, player.x, player.y, player.obj);
         // 让敌机飞
         for (int i = 0; i < length(planes); ++i)
@@ -358,10 +345,10 @@ static void updateGuiGame()
             else
             {
                 // 敌机还在场上
-                struct AABB box2;
+                AABB box2;
                 getAABB(&box2, planes[i].x, planes[i].y, planes[i].obj);
                 char flag = 0; // 敌机是否死亡
-                if (checkBullet(bullets, &box2, '|'))
+                if (checkProjectile(bullets[0], GAME_WIDTH, &box2, '|'))
                 {
                     // 敌机被击中
                     flag = 1;
@@ -397,12 +384,12 @@ static void updateGuiGame()
             }
         }
         // 飞机碰道具
-        score += checkBullet(items, &box, '$') * 1000;
-        player.level += checkBullet(items, &box, 'L');
-        player.skill += checkBullet(items, &box, 'X');
+        score += checkProjectile(items[0], GAME_WIDTH, &box, '$') * 1000;
+        player.level += checkProjectile(items[0], GAME_WIDTH, &box, 'L');
+        player.skill += checkProjectile(items[0], GAME_WIDTH, &box, 'X');
         if (player.skill > 3) player.skill = 3;
         // 飞机碰子弹
-        player.health -= checkBullet(bullets, &box, 'o') * 5;
+        player.health -= checkProjectile(bullets[0], GAME_WIDTH, &box, 'o') * 5;
         // 更新飞机数据
         if (player.health <= 0)
         {
@@ -467,9 +454,9 @@ static void updateGuiGame()
 
 static void updateGuiRank()
 {
-    struct StrObject* obj = res_get(BUTTONS);
-    struct StrObject* obj2 = res_get(STRINGS);
-    struct StrObject* obj3 = res_get(WEBSITE);
+    StrObject* obj = res_get(BUTTONS);
+    StrObject* obj2 = res_get(STRINGS);
+    StrObject* obj3 = res_get(WEBSITE);
     updateMenu(2);
     if (key.esc == 1)
     {
@@ -485,7 +472,7 @@ static void updateGuiRank()
         }
         else if (button == 1)
         {
-            openBrowser(obj3->str[1]);
+            util_openBrowser(obj3->str[1]);
         }
     }
     renderer_drawStr(12, 7, obj2->str[21]);
@@ -523,11 +510,11 @@ static void updateGuiSettings()
 
 static void updateGuiHelp()
 {
-    struct StrObject* obj = res_get(BUTTONS);
-    struct StrObject* obj2 = res_get(STRINGS);
-    struct StrObject* obj3 = res_get(HELP);
-    struct StrObject* obj4 = res_get(ABOUT);
-    struct StrObject* obj5 = res_get(WEBSITE);
+    StrObject* obj = res_get(BUTTONS);
+    StrObject* obj2 = res_get(STRINGS);
+    StrObject* obj3 = res_get(HELP);
+    StrObject* obj4 = res_get(ABOUT);
+    StrObject* obj5 = res_get(WEBSITE);
     updateMenu(2);
     if (key.esc == 1)
     {
@@ -543,7 +530,7 @@ static void updateGuiHelp()
         }
         else if (button == 1)
         {
-            openBrowser(obj5->str[2]);
+            util_openBrowser(obj5->str[2]);
         }
     }
     renderer_drawStr(8, 4, obj2->str[25]);
@@ -556,8 +543,8 @@ static void updateGuiHelp()
 
 static void updateGuiPause()
 {
-    struct StrObject* obj = res_get(BUTTONS);
-    struct StrObject* obj2 = res_get(STRINGS);
+    StrObject* obj = res_get(BUTTONS);
+    StrObject* obj2 = res_get(STRINGS);
     updateMenu(2);
     if (key.esc == 1)
     {
@@ -577,9 +564,9 @@ static void updateGuiPause()
 
 static void updateGuiSubmit()
 {
-    struct StrObject* obj = res_get(BUTTONS);
-    struct StrObject* obj2 = res_get(STRINGS);
-    struct StrObject* obj3 = res_get(GAMEOVER);
+    StrObject* obj = res_get(BUTTONS);
+    StrObject* obj2 = res_get(STRINGS);
+    StrObject* obj3 = res_get(GAMEOVER);
     updateMenu(2);
     if (key.enter == 1)
     {
@@ -643,8 +630,8 @@ static void updateGuiSubmit()
 
 static void updateGuiResult()
 {
-    struct StrObject* obj = res_get(BUTTONS);
-    struct StrObject* obj2 = res_get(STRINGS);
+    StrObject* obj = res_get(BUTTONS);
+    StrObject* obj2 = res_get(STRINGS);
     if (key.enter == 1)
     {
         openGui(GUI_MENU);
@@ -663,7 +650,7 @@ static void updateGuiResult()
 
 void game_run()
 {
-    running = 1;
+    running = true;
     game_init();
     game_loop();
     game_exit();
@@ -690,7 +677,7 @@ void game_loop()
     openGui(GUI_MENU);
     while (running)
     {
-        clock_t t = getCurrentTime();
+        clock_t t = util_getCurrentTime();
         input_handle();
         renderer_clear();
         if (gui >= GUI_MENU && gui < GUI_COUNT)
@@ -704,45 +691,17 @@ void game_loop()
         }
         renderer_refresh();
         if (gui != GUI_PAUSE) ++frame;
-        clock_t wait = 1000 / fps - (getCurrentTime() - t);
+        clock_t wait = 1000 / fps - (util_getCurrentTime() - t);
         if (wait < 0)
         {
             log_warn("slow renderer: %ld ms.", -wait);
             wait = 0;
         }
-        mysleep(wait);
+        util_sleep(wait);
     }
 }
 
 void game_exit()
 {
     renderer_end();
-}
-
-// 毫秒
-static clock_t getCurrentTime()
-{
-    return 1000 * clock() / CLOCKS_PER_SEC;
-}
-
-// 毫秒
-static void mysleep(clock_t time)
-{
-#if defined(_WIN32) || defined(_WIN64)
-    Sleep(time);
-#else
-    usleep(time * 1000);
-#endif
-}
-
-static void openBrowser(const char* url)
-{
-#if defined(_WIN32) || defined(_WIN64)
-    // ShellExecuteA(NULL, "open", url, NULL, NULL, SW_SHOWNORMAL);
-    char command[50] = "start ";
-#else
-    // system("/bin/sh -c chromium-browser");
-    char command[50] = "xdg-open ";
-#endif
-    system(strcat(command, url));
 }

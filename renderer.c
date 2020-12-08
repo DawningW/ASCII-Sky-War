@@ -63,7 +63,7 @@ void renderer_drawStr(int x, int y, const char* str)
     mvwaddstr(stdscr, y, x, str);
 }
 
-void renderer_drawStrObj(int x, int y, struct StrObject* obj)
+void renderer_drawStrObj(int x, int y, StrObject* obj)
 {
     for (unsigned char i = 0; i < obj->height; ++i)
     {
@@ -71,7 +71,7 @@ void renderer_drawStrObj(int x, int y, struct StrObject* obj)
     }
 }
 
-void renderer_drawButton(int x, int y, const char* str, char checked)
+void renderer_drawButton(int x, int y, const char* str, bool checked)
 {
     if (checked) attron(A_REVERSE);
     renderer_drawStr(x, y, str);

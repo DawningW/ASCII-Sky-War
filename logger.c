@@ -17,7 +17,7 @@ void log_close()
     if (file) fclose(file);
 }
 
-void log_print(enum LOG_LEVEL level, const char* msg, ...)
+void log_print(LOG_LEVEL level, const char* msg, ...)
 {
 #ifndef _DEBUG
     if (level == LOG_DEBUG) return;

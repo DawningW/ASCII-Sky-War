@@ -9,7 +9,7 @@
 #endif
 
 // 按键状态结构体
-struct Key
+typedef struct
 {
     unsigned int esc;
     unsigned int enter;
@@ -25,10 +25,10 @@ struct Key
     unsigned int d;
     unsigned int j;
     unsigned int k;
-};
+} Key;
 
 // 当前按键状态
-extern struct Key key;
+extern Key key;
 extern MEVENT mevent;
 // TODO 鼠标按键示例 mevent.bstate & BUTTON1_CLICKED
 

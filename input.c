@@ -1,5 +1,6 @@
 #include "input.h"
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
 #if defined(_WIN32) || defined(_WIN64)
@@ -12,13 +13,13 @@ HWND hWnd;
 #endif
 
 int lastkey;
-struct Key key;
+Key key;
 MEVENT mevent;
 
 void input_init()
 {
     intrflush(stdscr, FALSE);
-    input_mode(1);
+    input_mode(true);
     if (has_mouse())
         mousemask(ALL_MOUSE_EVENTS, NULL);
 #if defined(_WIN32) || defined(_WIN64)
@@ -28,7 +29,7 @@ void input_init()
     memset(&key, 0, sizeof(key));
 }
 
-void input_mode(char mode)
+void input_mode(bool mode)
 {
     curs_set(!mode);
     if (mode)

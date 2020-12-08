@@ -7,16 +7,16 @@
 #define length(arr) sizeof(arr) / sizeof(arr[0])
 
 // 存储字符串/画的结构体
-struct StrObject
+typedef struct
 {
     const char** str;
     int width;
     int height;
-};
+} StrObject;
 // TODO 透明遮罩
 
 // 资源枚举
-enum Resources
+typedef enum
 {
     // 丢失
     MISSINGNO,
@@ -40,10 +40,10 @@ enum Resources
 
     // 枚举元素数量
     COUNT
-};
+} Resources;
 
-void res_add(enum Resources, struct StrObject*);
-struct StrObject* res_get(enum Resources);
+void res_add(Resources, StrObject*);
+StrObject* res_get(Resources);
 void res_load();
 void res_unload();
 

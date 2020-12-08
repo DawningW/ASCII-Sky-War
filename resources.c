@@ -6,12 +6,12 @@
 #include <string.h>
 
 // ´æ´¢×Ö·û´®/»­
-struct StrObject* resources[COUNT];
+StrObject* resources[COUNT];
 
 // ¶ÁÈ¡×Ö·û´®/»­
-struct StrObject* _readStrObj(const char** strarray, size_t width, size_t height)
+StrObject* _readStrObj(const char** strarray, size_t width, size_t height)
 {
-    struct StrObject* newobj = malloc(sizeof(struct StrObject));
+    StrObject* newobj = malloc(sizeof(StrObject));
     if (newobj == NULL) return NULL;
     newobj->str = strarray;
     newobj->width = width;
@@ -20,14 +20,14 @@ struct StrObject* _readStrObj(const char** strarray, size_t width, size_t height
 }
 #define readStrObj(strarray) _readStrObj(strarray, strlen(strarray[0]), length(strarray))
 
-void res_add(enum Resources id, struct StrObject* object)
+void res_add(Resources id, StrObject* object)
 {
     if (id < MISSINGNO || id >= COUNT) return;
     resources[id] = object;
 }
 #define res_add_auto(id) res_add(id, readStrObj(_##id))
 
-struct StrObject* res_get(enum Resources id)
+StrObject* res_get(Resources id)
 {
     if (id <= MISSINGNO || id >= COUNT) id = MISSINGNO;
     return resources[id];

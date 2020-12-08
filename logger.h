@@ -1,19 +1,19 @@
 #ifndef __LOGGER_H__
 #define __LOGGER_H__
 
-enum LOG_LEVEL
+typedef enum
 {
 	LOG_DEBUG,
 	LOG_INFO,
 	LOG_WARNING,
 	LOG_ERROR,
 	LOG_FATAL
-};
+} LOG_LEVEL;
 
 void log_init();
 void log_close();
 
-void log_print(enum LOG_LEVEL level, const char* msg, ...);
+void log_print(LOG_LEVEL level, const char* msg, ...);
 #define log_debug(msg, ...) log_print(LOG_DEBUG, msg, ##__VA_ARGS__)
 #define log_info(msg, ...) log_print(LOG_INFO, msg, ##__VA_ARGS__)
 #define log_warn(msg, ...) log_print(LOG_WARNING, msg, ##__VA_ARGS__)

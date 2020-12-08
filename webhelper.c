@@ -4,16 +4,16 @@
 #include <string.h>
 #include "logger.h"
 
-struct StringMemory
+typedef struct
 {
     size_t size;
     char* string;
-};
+} StringMemory;
 
 static size_t WriteMemoryCallback(void* contents, size_t size, size_t nmemb, void* userp)
 {
     size_t realsize = size * nmemb;
-    struct StringMemory* mem = (struct StringMemory*) userp;
+    StringMemory* mem = (StringMemory*) userp;
     char* ptr = realloc(mem->string, mem->size + realsize + 1);
     if (!ptr)
     {
@@ -34,7 +34,7 @@ char* util_httpget(const char* url)
 
 char* util_httppost(const char* url, const char* fields)
 {
-    struct StringMemory chunk = { 0, malloc(1) };
+    StringMemory chunk = { 0, malloc(1) };
     CURL* curl = curl_easy_init();
     if (curl)
     {

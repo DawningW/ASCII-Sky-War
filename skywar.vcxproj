@@ -162,6 +162,7 @@
     <ClCompile Include="physics.c" />
     <ClCompile Include="renderer.c" />
     <ClCompile Include="resources.c" />
+    <ClCompile Include="util.c" />
     <ClCompile Include="webhelper.c" />
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +173,7 @@
     <ClInclude Include="physics.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="resources.h" />
+    <ClInclude Include="util.h" />
     <ClInclude Include="webhelper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

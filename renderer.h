@@ -1,6 +1,7 @@
 #ifndef __RENDERER_H__
 #define __RENDERER_H__
 
+#include <stdbool.h>
 #if defined(_WIN32) || defined(_WIN64)
 #define PDC_WIDE
 #include <PDCurses/curses.h>
@@ -21,9 +22,9 @@ void renderer_drawChar(int x, int y, char c);
 void renderer_drawWideChar(int x, int y, wchar_t wc);
 void renderer_drawStr(int x, int y, const char* str);
 #define renderer_drawStrCenter(x, y, str) renderer_drawStr(x - strlen(str) / 2, y, str)
-void renderer_drawStrObj(int x, int y, struct StrObject* obj);
+void renderer_drawStrObj(int x, int y, StrObject* obj);
 #define renderer_drawStrObjCenter(x, y, obj) renderer_drawStrObj(x - obj->width / 2, y - obj->height / 2, obj)
-void renderer_drawButton(int x, int y, const char* str, char checked);
+void renderer_drawButton(int x, int y, const char* str, bool checked);
 #define renderer_drawButtonCenter(x, y, str, checked) renderer_drawButton(x - strlen(str) / 2, y, str, checked)
 void renderer_drawProgress(int x, int y, int n, double progress);
 #define renderer_printStr(x, y, str, ...) mvwprintw(stdscr, y, x, str, ##__VA_ARGS__)
