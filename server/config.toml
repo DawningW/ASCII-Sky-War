@@ -1,0 +1,23 @@
+[server]
+  name = "famehall"
+  addr = ":8888"
+
+[server.logger]
+  level = "debug"
+
+# 数据库相关
+[database]
+  driver = "mysql"
+
+[mysql]
+  dbHost = "localhost"
+  dbPort = "3306"
+  dbName = "famehall"
+  dbParams = "parseTime=true&loc=Local"
+  dbUser = "root"
+  dbPasswd = "000..."
+
+[webpage]
+  HallLimit = 10
+
+
