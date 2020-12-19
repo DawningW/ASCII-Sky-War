@@ -25,9 +25,9 @@ func main() {
 	app.Post("/hall", controller.PostHall)
 	app.Get("/hall", controller.GetHall)
 	
-	// static source
+	// Static source
 	app.HandleDir("/hall/index", "./assets")
 
-	// Listen in 8888 port
+	// Listen in port
 	app.Run(iris.Addr(config.Viper.GetString("server.addr")), iris.WithoutServerError(iris.ErrServerClosed))
 }

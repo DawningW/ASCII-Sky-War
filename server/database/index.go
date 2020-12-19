@@ -48,7 +48,7 @@ func initMysql() {
 	var err error
 	DB, err = xorm.NewEngine(dbType, dbURL)
 	if err != nil {
-		log.Printf("Open mysql failed,err:%v\n", err)
+		log.Printf("Open mysql failed, err: %v\n", err)
 		panic(err)
 	}
 }
@@ -65,11 +65,8 @@ func initTable() {
 
 // 设置可选配置
 func configDB() {
-	// 设置日志等级，设置显示sql，设置显示执行时间
-	DB.SetLogLevel(xorm.DEFAULT_LOG_LEVEL)
+	// 设置显示sql
 	DB.ShowSQL(true)
-	DB.ShowExecTime(true)
-
 	// 指定结构体字段到数据库字段的转换器
 	// 默认为core.SnakeMapper
 	// 但是我们通常在struct中使用"ID"

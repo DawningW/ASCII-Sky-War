@@ -15,7 +15,7 @@
   dbName = "famehall"
   dbParams = "parseTime=true&loc=Local"
   dbUser = "root"
-  dbPasswd = "000..."
+  dbPasswd = "skywar"
 
 [webpage]
   HallLimit = 10
