@@ -1,10 +1,14 @@
 # ASCII-Sky-War
 
 ## 背景故事
-long long ago, an interplanetary war outbreaked, the evil invaders invaded all the planets for sufficient resources. During the period, many people died for the defense of their homeland. However, this massacre was far from over, and if no one could stand out to fight with the enemies, at last, maybe thousands of people would suffer the pain for a long time that anyone couldn’t imagine. In this emergency that allowed no time to delay, warriors appeared just like a beam of light in the dark, they piloted starships to fight with numerous evil starships bravely after a long time for training. In this game,  you can act as the brave man to experience the cruel war, piloting the starships to fight. 
+Long long ago, an interplanetary war outbreaked, the evil invaders invaded all the planets for sufficient resources. During the period, many people died for the defense of their homeland. However, this massacre was far from over, and if no one could stand out to fight with the enemies, at last, maybe thousands of people would suffer the pain for a long time that anyone couldn’t imagine. In this emergency that allowed no time to delay, warriors appeared just like a beam of light in the dark, they piloted starships to fight with numerous evil starships bravely after a long time for training. In this game,  you can act as the brave man to experience the cruel war, piloting the starships to fight. 
 
 ## 项目简介
 我的大一上学期C语言大作业
+
+一个简易的飞机大战控制台小游戏, 附带排行榜前后端
+
+前端使用Bootstrap+Ajax, 后端使用go语言开发
 
 ## 如何编译
 ### Windows
@@ -37,6 +41,19 @@ make install
 - PDCurses-3.9
 - cJSON-1.7.14
 - curl-7.73.0
+
+## 排行榜服务器
+详见项目中的server目录
+
+在该目录下运行`go build`编译服务端
+
+**config.toml**是服务端的配置文件
+
+前端网页位于server/assets目录下
+
+后端文档详见([API.md](https://github.com/DawningW/ASCII-Sky-War/blob/main/server/API.md))
+
+感谢xaxys大佬编写的排行榜后端
 
 ## 许可
 本项目代码以WTFPL协议开源, 但您不能未经修改直接编译整个项目再二次发布
