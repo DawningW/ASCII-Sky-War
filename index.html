@@ -116,7 +116,7 @@
 			function loadPage(page)
 			{
 				$.ajax({
-					url: "http://api.oasis.run/hall?record=" + page * 10 + (name != "" ? "&name=" + name : ""),
+					url: "https://api.oasis.run/hall?record=" + page * 10 + (name != "" ? "&name=" + name : ""),
 					success: function(result) {
 						var content = "";
 						if (result.code == undefined)
