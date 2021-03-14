@@ -61,7 +61,7 @@ static const char* _WCNB[] = {
 };
 
 static const char* _WEBSITE[] = {
-    "http://api.oasis.run/hall",
+    "https://api.oasis.run/hall",
     "https://dawningw.github.io/ASCII-Sky-War/",
     "https://github.com/DawningW/ASCII-Sky-War"
 };
