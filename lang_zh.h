@@ -60,7 +60,7 @@ static const char* _ABOUT[] = {
 };
 
 static const char* _STRINGS[] = {
-    "飞机大战羽毛球 V1.0",
+    "飞机大战羽毛球 V1.5",
     "Copyright 2020 DUT Soft2016-612. 仅供大一C语言作业使用.",
     "提示: 用上下键选择, 回车键确认.",
 
