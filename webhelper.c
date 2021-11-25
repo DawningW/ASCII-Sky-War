@@ -4,6 +4,8 @@
 #include <string.h>
 #include "logger.h"
 
+// TODO 重构为network, 并加入socket为联机做支持
+
 typedef struct
 {
     size_t size;

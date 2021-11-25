@@ -2,7 +2,7 @@ cc = gcc
 deps = $(wildcard ./*.h)
 src = $(wildcard ./*.c)
 obj = $(src:%.c=%.o)
-lib = -lm -lncurses -lcurl -lcjson
+lib = -lm -lncurses -lsoundio -lcurl -lcjson
 
 build: $(obj)
 	$(cc) $(obj) $(lib) -o build

@@ -25,6 +25,13 @@ lib目录下附带32位版本的静态库, 如需64位库请自行编译
 在Ubuntu下可运行以下命令安装所需依赖库
 sudo apt install libncurses5-dev
 sudo apt install libcurl4-openssl-dev
+git clone https://github.com/andrewrk/libsoundio.git
+cd libsoundio
+mkdir build
+cd build
+cmake ..
+make
+make install
 git clone https://github.com/DaveGamble/cJSON.git
 cd cJSON
 make
@@ -38,7 +45,8 @@ make install
 运行`make clean`可清理*.o目标文件
 
 ## 第三方库
-- PDCurses-3.9
+- ncurses/PDCurses-3.9
+- libsoundio-2.0.0
 - cJSON-1.7.14
 - curl-7.73.0
 
@@ -66,4 +74,4 @@ make install
 
 引用的第三方库仍然遵守原协议
 
-### 大连理工大学软件学院2016班612寝室作品
+### 大连理工大学软件学院2016班作品
