@@ -16,7 +16,7 @@ lib目录下附带32位版本的静态库, 如需64位库请自行编译
 
 注: 用nmake编译PDCurses时需在Makefile.vc的开头加入变量PLATFORM = X86
 
-**需要用Visual Studio 2019或以上版本构建项目**
+**需要用Visual Studio 2022或以上版本构建项目**
 
 ### Linux
 请自行下载/编译所需的库
@@ -25,29 +25,20 @@ lib目录下附带32位版本的静态库, 如需64位库请自行编译
 在Ubuntu下可运行以下命令安装所需依赖库
 sudo apt install libncurses5-dev
 sudo apt install libcurl4-openssl-dev
-git clone https://github.com/andrewrk/libsoundio.git
-cd libsoundio
-mkdir build
-cd build
-cmake ..
-make
-make install
-git clone https://github.com/DaveGamble/cJSON.git
-cd cJSON
-make
-make install
 ```
 
 本项目提供了一个简易的make脚本([Makefile](https://github.com/DawningW/ASCII-Sky-War/blob/main/Makefile))用于构建项目
 
-在项目根目录下运行`make`会生成名为build的可执行文件
+在项目根目录下运行`make`会在build目录下生成名为skywar的可执行文件
 
 运行`make clean`可清理*.o目标文件
 
 ## 第三方库
-- ncurses/PDCurses-3.9
-- libsoundio-2.0.0
-- cJSON-1.7.14
+- incbin
+- ncurses
+- PDCurses-3.9
+- miniaudio-0.10.42
+- cJSON-1.7.15
 - curl-7.73.0
 
 ## 排行榜服务器

@@ -1,16 +1,30 @@
-cc = gcc
-deps = $(wildcard ./*.h)
-src = $(wildcard ./*.c)
-obj = $(src:%.c=%.o)
-lib = -lm -lncurses -lsoundio -lcurl -lcjson
+# ASCII-Sky-War Makefile
 
-build: $(obj)
-	$(cc) $(obj) $(lib) -o build
+# Paths
+# $(shell pwd)
+DIR=.
+LIB_DIR=$(DIR)/lib
+INCLUDE_DIR=$(DIR)/include
+SRC_DIR=$(DIR)/src
+BUILD_DIR=$(DIR)/build
+# Objects
+LIB = -lm -lncurses -lcurl
+SRC = $(wildcard $(SRC_DIR)/*.c)
+OBJ = $(SRC:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
+# Complier options
+CC = gcc
+CFLAGS=-Wall
+LDFLAGS=$(LIB)
 
-%.o: %.c $(deps)
-	$(cc) -c -I ./include $< -o $@
+# Compile targets
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	$(CC) -c $< -I $(INCLUDE_DIR) -o $@
 
-.PHONY: clean
+build: $(OBJ)
+	$(CC) $(OBJ) $(LDFLAGS) -o $(BUILD_DIR)/skywar
 
 clean:
-	rm -rf $(obj)
+	rm -rf $(OBJ)
+
+# Bypass files with the same name
+.PHONY: build clean

@@ -153,29 +153,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="audio.c" />
-    <ClCompile Include="game.c" />
-    <ClCompile Include="input.c" />
-    <ClCompile Include="lang_common.h" />
-    <ClCompile Include="lang_zh.h" />
-    <ClCompile Include="logger.c" />
-    <ClCompile Include="main.c" />
-    <ClCompile Include="physics.c" />
-    <ClCompile Include="renderer.c" />
-    <ClCompile Include="resources.c" />
-    <ClCompile Include="util.c" />
-    <ClCompile Include="webhelper.c" />
+    <ClCompile Include="src\cJSON.c" />
+    <ClCompile Include="src\game.c" />
+    <ClCompile Include="src\input.c" />
+    <ClCompile Include="src\logger.c" />
+    <ClCompile Include="src\main.c" />
+    <ClCompile Include="src\physics.c" />
+    <ClCompile Include="src\renderer.c" />
+    <ClCompile Include="src\resources.c" />
+    <ClCompile Include="src\util.c" />
+    <ClCompile Include="src\webhelper.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game.h" />
-    <ClInclude Include="input.h" />
-    <ClInclude Include="lang_en.h" />
-    <ClInclude Include="logger.h" />
-    <ClInclude Include="physics.h" />
-    <ClInclude Include="renderer.h" />
-    <ClInclude Include="resources.h" />
-    <ClInclude Include="util.h" />
-    <ClInclude Include="webhelper.h" />
+    <ClInclude Include="include\game.h" />
+    <ClInclude Include="include\input.h" />
+    <ClInclude Include="include\lang_common.h" />
+    <ClInclude Include="include\lang_en.h" />
+    <ClInclude Include="include\lang_zh.h" />
+    <ClInclude Include="include\logger.h" />
+    <ClInclude Include="include\physics.h" />
+    <ClInclude Include="include\renderer.h" />
+    <ClInclude Include="include\resources.h" />
+    <ClInclude Include="include\util.h" />
+    <ClInclude Include="include\webhelper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

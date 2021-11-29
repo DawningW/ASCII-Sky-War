@@ -57,3 +57,5 @@ Debug
 Release
 *.vcxproj.filters
 *.vcxproj.user
+
+build
